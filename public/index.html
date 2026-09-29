@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>GitHub DevOps Practical</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            text-align: center;
+            padding: 60px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #24292f;
+        }
+
+        .status {
+            color: green;
+            font-weight: bold;
+        }
+
+        button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 6px;
+            background: #24292f;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #444;
+        }
+
+        #result {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>GitHub DevOps Practical</h1>
+
+    <p class="status">Application Running</p>
+
+    <p>
+        Node.js + Express Application
+    </p>
+
+    <button onclick="checkHealth()">
+        Check API
+    </button>
+
+    <div id="result"></div>
+
+</div>
+
+<script>
+
+async function checkHealth() {
+
+    try {
+
+        const response = await fetch("/api/health");
+
+        const data = await response.json();
+
+        document.getElementById("result").innerHTML =
+            `<p>${data.message}</p>
+             <p>Version: ${data.version}</p>`;
+
+    } catch (error) {
+
+        document.getElementById("result").innerHTML =
+            `<p>API Error</p>`;
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>
